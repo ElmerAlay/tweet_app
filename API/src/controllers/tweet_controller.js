@@ -1,7 +1,7 @@
 const mysqlConnection = require('../configurations/db');
 
 const get = (req, res) => {
-    mysqlConnection.query('SELECT * FROM User', (err, rows, fields) => {
+    mysqlConnection.query('SELECT * FROM Tweet', (err, rows, fields) => {
         if (!err) {
             res.json(rows);
         } else {
@@ -14,9 +14,9 @@ const get = (req, res) => {
 
 const getOne = (req, res) => {
     const { idUser } = req.body;
-    mysqlConnection.query('SELECT * FROM USER WHERE idUser = ?', [idUser], (err, rows, fields) => {
+    mysqlConnection.query('SELECT * FROM Tweet WHERE idUser = ?', [idUser], (err, rows, fields) => {
         if (!err) {
-            res.json(rows[0]);
+            res.json(rows);
         } else {
             console.log(err);
         }
@@ -24,11 +24,11 @@ const getOne = (req, res) => {
 }
 
 const insert = (req, res) => {
-    const { idUser, name, email } = req.body;
+    const { idTweet, message, idUser } = req.body;
 
-    const query = `INSERT INTO User(idUser, name, email) values (?, ?, ?)`;
+    const query = `INSERT INTO TWEET(idTweet, message, idUser) values (?, ?, ?)`;
 
-    mysqlConnection.query(query, [idUser, name, email], (err, rows, fields) => {
+    mysqlConnection.query(query, [idTweet, message, idUser], (err, rows, fields) => {
         if (!err) {
             res.json({ Status: 'User Saved!' });
         } else {
