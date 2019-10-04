@@ -1,8 +1,8 @@
 const mysql = require('mysql');
 
 mysqlConnection = mysql.createConnection({
-    host: "localhost",
-    port: "3307",
+    host: "db",
+    port: "5000",
     user: "root",
     password: "1234",
     database: "tweet_app_db"
