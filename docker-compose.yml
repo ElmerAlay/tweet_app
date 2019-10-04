@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  db:
+    build: ./DB
+    ports:
+      - "6603:3306"
+    volumes:
+      - ./DB/data:/var/lib/mysql
+    #environment:
+    #  MYSQL_DATABASE: db_tweet_app
+    #  MYSQL_ROOT_PASSWORD: 1234
+    #  MYSQL_USER: elmer
+    #  MYSQL_PASSWORD: 1234
+    #  DATABASE_HOST: db
+  web:
+    build: ./API
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: db_tweet_app
+      DATABASE_HOST: "127.0.0.1"
+      MYSQL_PORT: 6603
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    restart: on-failure
