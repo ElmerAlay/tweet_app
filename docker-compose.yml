@@ -9,6 +9,8 @@ services:
       - ./DB/data:/var/lib/mysql
   web:
     build: ./API
+    environment:
+      DATABASE_HOST: '192.168.1.10'
     ports:
      - "4000:4000"
     depends_on:

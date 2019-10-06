@@ -3,7 +3,7 @@ const mysqlConnection = require('../configurations/db');
 const get = (req, res) => {
     mysqlConnection.query('SELECT * FROM User', (err, rows, fields) => {
         if (!err) {
-            res.json(rows);
+            res.json({ "filas": rows });
         } else {
             console.log(err);
         }
@@ -13,8 +13,8 @@ const get = (req, res) => {
 }
 
 const getOne = (req, res) => {
-    const { idUser } = req.body;
-    mysqlConnection.query('SELECT * FROM USER WHERE idUser = ?', [idUser], (err, rows, fields) => {
+    const { idUser } = req.params;
+    mysqlConnection.query('SELECT * FROM User WHERE idUser = ?', [idUser], (err, rows, fields) => {
         if (!err) {
             res.json(rows[0]);
         } else {

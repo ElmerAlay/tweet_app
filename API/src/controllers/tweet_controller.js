@@ -13,7 +13,7 @@ const get = (req, res) => {
 }
 
 const getOne = (req, res) => {
-    const { idUser } = req.body;
+    const { idUser } = req.params;
     mysqlConnection.query('SELECT * FROM Tweet WHERE idUser = ?', [idUser], (err, rows, fields) => {
         if (!err) {
             res.json(rows);
@@ -24,13 +24,13 @@ const getOne = (req, res) => {
 }
 
 const insert = (req, res) => {
-    const { idTweet, message, idUser } = req.body;
+    const { message, idUser } = req.body;
 
-    const query = `INSERT INTO TWEET(idTweet, message, idUser) values (?, ?, ?)`;
+    const query = `INSERT INTO Tweet(message, idUser) values (?, ?)`;
 
-    mysqlConnection.query(query, [idTweet, message, idUser], (err, rows, fields) => {
+    mysqlConnection.query(query, [message, idUser], (err, rows, fields) => {
         if (!err) {
-            res.json({ Status: 'User Saved!' });
+            res.json({ Status: 'Tweet Saved!' });
         } else {
             console.log(err);
         }
