@@ -1,7 +1,7 @@
 var formulario = document.getElementById('formulario');
 var contenido = document.querySelector('#contenido');
 var existe = false;
-var url = "http://localhost:4000/";
+var url = "http://192.168.1.10:4000/";
 
 formulario.addEventListener('submit', async function(e) {
     e.preventDefault();

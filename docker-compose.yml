@@ -7,7 +7,7 @@ services:
       - "6602:3306"
     volumes:
       - ./DB/data:/var/lib/mysql
-  web:
+  api:
     build: ./API
     environment:
       DATABASE_HOST: '192.168.1.10'
@@ -16,3 +16,10 @@ services:
     depends_on:
       - db
     restart: on-failure
+
+  web:
+    image: php:apache
+    volumes:
+      - ./WEB:/var/www/html
+    ports:
+      - 5500:80
